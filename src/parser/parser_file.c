@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 18:05:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/04 23:19:47 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/06 12:17:43 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	read_file(char *map_name, t_parser *parser)
 	while (line)
 	{
 		//Verifica se é uma linha vazia, se for pula para a prox linha
-		if (empty_line(line))
+		if (!empty_line(line))
 		{
 			get_texture(line, parser);
 			// printf("Testando GNL: %s\n", line);

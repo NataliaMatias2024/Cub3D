@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:30:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/06 02:03:41 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/06 12:34:20 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,19 @@
 
 void	print_error(int status)
 {
-	printf("Error\n");
-	if (status > 0 && status <= 3)
+	// Manda o "Error\n" para o fd 2 (stderr)
+	ft_putstr_fd("Error\n", 2);
+	if (status == 1)
 	{
-		printf("┌────────────────────────────────────────┐\n");
-		printf("| 42school                               |\n");
-		printf("|                                        |\n");
-		printf("|-------------[ Invalid Map ]------------|\n");
-		printf("| To execute correctly, use the command: |\n");
-		printf("|----------------------------------------|\n");
-		printf("| ./cub3D ./maps/NAME_MAP.cub            |\n");
-		printf("|                                        |\n");
-		printf("| PS: Make sure the file exists and that |\n");
-		printf("| the extension is correct (.cub).   	 |\n");
-		printf("└────────────────────────────────────────┘\n");
+		ft_putstr_fd("Invalid number of arguments. ", 2);
+		ft_putstr_fd("Usage: ./cub3D <map.cub>\n", 2);
 	}
+	else if (status == 2)
+		ft_putstr_fd("Invalid file extension. Expected '.cub'.\n", 2);
+	else if (status == 3)
+		ft_putstr_fd("File does not exist or cannot be opened.\n", 2);
 	else if (status == 4)
-	{
-		printf("Invalid file descriptor. ");
-		printf("Make sure you have the right permission to this file\n");
-	}
+		ft_putstr_fd("Invalid file descriptor. Check file permissions.\n", 2);
 }
 
 void	init_structs(t_parser *parser, t_file *file, t_texture *texture)
@@ -59,13 +52,13 @@ int	empty_line(char *line)
 	int	i;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
-		if(!ft_isspace(line[i]) && line[i] != '\n')
-			return (1);
-		i++;			
+		if (!ft_isspace(line[i]) && line[i] != '\n')
+			return (0);
+		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	skip_space(char *line)
@@ -73,9 +66,9 @@ int	skip_space(char *line)
 	int	i;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
-		if(ft_isspace(line[i]))
+		if (ft_isspace(line[i]))
 			i++;
 		else
 			return (i);
