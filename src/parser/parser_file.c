@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 18:05:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 18:34:52 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/07 19:20:41 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ Ponto de partida - check points
 
 //Conforme as linhas de texto são lidas as informaçoes sao isoladas,
 //tratadas e salvas na struct de parser
+//Erros devem interromper o programa e avisar a gnl que deve encerrar e liberar memoria
 int	read_file(char *map_name, t_parser *parser)
 {
 	int		fd;
@@ -47,6 +48,7 @@ int	read_file(char *map_name, t_parser *parser)
 		else if (parser->status != 0)
 		{
 			free(line);
+			get_next_line(-1);
 			close (fd);
 			return (0);
 		}

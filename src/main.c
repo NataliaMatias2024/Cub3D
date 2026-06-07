@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:55:09 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 16:28:48 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/07 19:10:57 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	main(int argc, char **argv)
 	{
 		printf("Veeeesh deu chabu!\n");
 		print_error(parser.status);
-		//TODO: Limpar Structs
+		clean_structs(&parser);
 		return (1);
 	}
 	else if (!read_file(argv[1], &parser))
 	{
 		printf("Ihhhhh mapa invalido!\n");
 		print_error(parser.status);
-		//TODO: Limpar Structs
+		clean_structs(&parser);
 		return (1);
 	}
 	printf("Tudo certo!\nRoda a bagaceira!!!\n");
@@ -47,6 +47,6 @@ int	main(int argc, char **argv)
 	printf("Texture WE: |%s|\n", parser.file->texture->we);
 	printf("Texture EA: |%s|\n", parser.file->texture->ea);
 	// printf("Player View: %s\n", parser.file->player_view);
-
+	clean_structs(&parser);
 	return (0);
 }
