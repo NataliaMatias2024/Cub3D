@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:55:09 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 13:33:04 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/07 16:28:48 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	printf("Tudo certo!\nRoda a bagaceira!!!\n");
-	
+
 	// printf("Status: %d\n", parser.status);
 	// printf("Color_ceiling: %d\n", parser.file->color_ceiling);
 	// printf("Color_floor: %d\n", parser.file->color_floor);

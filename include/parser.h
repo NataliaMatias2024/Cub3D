@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:49:21 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/06 12:12:07 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/07 16:58:18 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		empty_line(char *line);
 void	print_error(int status);
 void	get_texture(char *line, t_parser *parser);
 int		read_file(char *map_name, t_parser *parser);
+int		check_permission(char *file, t_parser *parser);
 int		check_args(int argc, char **argv, t_parser *status);
 void	init_structs(t_parser *parser, t_file *file, t_texture *texture);
 

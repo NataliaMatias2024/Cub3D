@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:30:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 14:03:11 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/07 17:14:38 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	print_error(int status)
 	else if (status == 2)
 		ft_putstr_fd("Invalid file extension. Expected '.cub'.\n", 2);
 	else if (status == 3)
-    {
-        ft_putstr_fd("File does not exist, is a directory, ", 2);
-        ft_putstr_fd("or cannot be opened. ", 2);
-        ft_putstr_fd("Check file permissions and its extension.\n", 2);
-    }
+	{
+		ft_putstr_fd("File does not exist, is a directory, ", 2);
+		ft_putstr_fd("or cannot be opened. ", 2);
+		ft_putstr_fd("Check file permissions and its extension.\n", 2);
+	}
 	else if (status == 4)
 		ft_putstr_fd("Invalid texture extension. Expected '.png'.\n", 2);
 	else if (status == 5)
@@ -82,4 +82,17 @@ int	skip_space(char *line)
 			return (i);
 	}
 	return (0);
+}
+
+int	check_permission(char *file, t_parser *parser)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		parser->status = 3;
+		return (-1);
+	}
+	return (fd);
 }
