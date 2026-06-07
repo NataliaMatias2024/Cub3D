@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:55:09 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/06 02:03:53 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/07 00:52:15 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	main(int argc, char **argv)
 	// printf("Player_y: %d\n", parser.file->player_y);
 	// printf("Total_x: %d\n", parser.file->total_x);
 	// printf("Total_y: %d\n", parser.file->total_y);
-	printf("Texture NO: %s\n", parser.file->texture->no);
-	printf("Texture SO: %s\n", parser.file->texture->so);
-	printf("Texture WE: %s\n", parser.file->texture->we);
-	printf("Texture EA: %s\n", parser.file->texture->ea);
+	printf("Texture NO: %s|\n", parser.file->texture->no);
+	// printf("Texture SO: %s\n", parser.file->texture->so);
+	// printf("Texture WE: %s\n", parser.file->texture->we);
+	// printf("Texture EA: %s\n", parser.file->texture->ea);
 	// printf("Player View: %s\n", parser.file->player_view);
 
 	return (0);
