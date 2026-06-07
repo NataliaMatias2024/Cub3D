@@ -1,7 +1,7 @@
-NO ./textura.png.pdf                           
-SO ./path_to_the_south_texture.png
-WE ./path_to_the_west_texture.png
-EA ./path_to_the_east_texture.png
+NO ./texture/dummy_NO.png
+SO 					./texture/dummy_SO.png
+WE 			./texture/dummy_WE.png                                     
+EA 	./texture/dummy_EA.png
                                                          
 F 220,100,0
 C 225,30,0

@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:30:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 00:52:29 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/07 14:03:11 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,14 @@ void	print_error(int status)
     {
         ft_putstr_fd("File does not exist, is a directory, ", 2);
         ft_putstr_fd("or cannot be opened. ", 2);
-        ft_putstr_fd("Check file permissions and their extension.\n", 2);
+        ft_putstr_fd("Check file permissions and its extension.\n", 2);
     }
 	else if (status == 4)
 		ft_putstr_fd("Invalid texture extension. Expected '.png'.\n", 2);
+	else if (status == 5)
+		ft_putstr_fd("Invalid texture. Expected a path without spaces.\n", 2);
+	else if (status == 6)
+		ft_putstr_fd("Duplicated texture. Check your map file.\n", 2);
 }
 
 void	init_structs(t_parser *parser, t_file *file, t_texture *texture)

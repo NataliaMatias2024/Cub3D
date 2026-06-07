@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 18:05:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 00:53:08 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/07 14:00:58 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 					//Cercado por 1 (parede)
 					//Preenchido por 0 (esp vazio),
 static int	check_path_extension(char *path);
+static int	check_final_path(char *path, t_parser *parser);
 
 int	read_file(char *map_name, t_parser *parser)
 {
@@ -43,7 +44,6 @@ int	read_file(char *map_name, t_parser *parser)
 		if (!empty_line(line) && parser->status == 0)
 		{
 			get_texture(line, parser);
-			// printf("Testando GNL: %s\n", line);
 		}
 		else if (parser->status != 0)//caso de erro liberamos a linha para n ocorrer leak e retornamos 0, encerrando looping
 		{
@@ -64,39 +64,90 @@ void	get_texture(char *line, t_parser *parser)
 	int		end; 
 	char	*temp;
 
-	// TODO : Retirar o \n do final e o nome da variavel das strings e deixar apenas a info.
 	end = 0;
 	start = 0;
 	start = skip_space(line);
 	if (!ft_strncmp(line + start, "NO", 2))
 	{
+		//SE alguma textura estiver duplicada retorna erro
+		if (parser->file->texture->no != NULL)
+		{
+			parser->status = 6;
+			return ;
+		}
 		//pula o nome da variavel + os espaços entre o nome e o inicio do caminho da textura
 		start = start + 2;
 		start = start + skip_space(line + start);
-		printf("start pós segundo skip = %d\n", start);
-
 		if (!check_path_extension(line))
 		{
-			end = ft_strlen(line);
-			printf("end final = %d\n", end);
+			end = ft_strlen(line) - start;
 			temp = ft_substr(line, start, end);
-			parser->file->texture->no = ft_strdup(temp);
+			if (check_final_path(temp, parser))
+				parser->file->texture->no = ft_strdup(temp);
 			free (temp);
 		}
 		else
-			parser->status = 4;	
+			parser->status = 4;
 	}
 	else if (!ft_strncmp(line + start, "SO", 2))
 	{
-		parser->file->texture->so = line;
+		if (parser->file->texture->so != NULL)
+		{
+			parser->status = 6;
+			return ;
+		}
+		start = start + 2;
+		start = start + skip_space(line + start);
+		if (!check_path_extension(line))
+		{
+			end = ft_strlen(line) - start;
+			temp = ft_substr(line, start, end);
+			if (check_final_path(temp, parser))
+				parser->file->texture->so = ft_strdup(temp);
+			free (temp);
+		}
+		else
+			parser->status = 4;
 	}
 	else if (!ft_strncmp(line + start, "WE", 2))
 	{
-		parser->file->texture->we = line;
+		if (parser->file->texture->we != NULL)
+		{
+			parser->status = 6;
+			return ;
+		}
+		start = start + 2;
+		start = start + skip_space(line + start);
+		if (!check_path_extension(line))
+		{
+			end = ft_strlen(line) - start;
+			temp = ft_substr(line, start, end);
+			if (check_final_path(temp, parser))
+				parser->file->texture->we = ft_strdup(temp);
+			free (temp);
+		}
+		else
+			parser->status = 4;
 	}
 	else if (!ft_strncmp(line + start, "EA", 2))
 	{
-		parser->file->texture->ea = line;
+		if (parser->file->texture->ea != NULL)
+		{
+			parser->status = 6;
+			return ;
+		}
+		start = start + 2;
+		start = start + skip_space(line + start);
+		if (!check_path_extension(line))
+		{
+			end = ft_strlen(line) - start;
+			temp = ft_substr(line, start, end);
+			if (check_final_path(temp, parser))
+				parser->file->texture->ea = ft_strdup(temp);
+			free (temp);
+		}
+		else
+			parser->status = 4;
 	}
 }
 
@@ -107,10 +158,8 @@ static int	check_path_extension(char *path)
 	int		result;
 
 	size = ft_strlen(path);
-	printf("size inicial = %d", size);
 	while(size > 4 && ft_isspace(path[size - 1]))
 		size--;
-	printf("size final = %d", size);
 	path[size] = '\0';
 	if (size <= 4)
 		result = 1;
@@ -119,3 +168,31 @@ static int	check_path_extension(char *path)
 	return (result);
 }
 
+//Garante que nao será aceito path com espaços no meio. Ex: ./path_to_the_eas    t_texture.png
+static int	check_final_path(char *path, t_parser *parser)
+{
+	int i;
+	int	fd;
+
+	i = 0;
+	while (path[i])
+	{
+		if(ft_isspace(path[i]))
+		{
+			parser->status = 5;
+			return (0);
+		}
+		i++;
+	}
+
+	//Aqui em teoria ja esta td pronto para rodar na MLX
+	//Ultima coisa é verificar se o caminho q isolamos realmente existe e temos permissao para acessa-lo
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		parser->status = 3;
+		return (0);
+	}
+	close (fd);
+	return (1);
+}
