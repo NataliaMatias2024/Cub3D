@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 18:05:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 19:20:41 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 20:09:32 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	read_file(char *map_name, t_parser *parser)
 		if (!empty_line(line) && parser->status == 0)
 		{
 			get_texture(line, parser);
+			get_color(line, parser);
 		}
 		else if (parser->status != 0)
 		{

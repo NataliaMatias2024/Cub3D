@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:55:09 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 19:10:57 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 20:09:44 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	main(int argc, char **argv)
 		clean_structs(&parser);
 		return (1);
 	}
-	printf("Tudo certo!\nRoda a bagaceira!!!\n");
+	printf("Tudo certo!\nRoda a bagaceira!!!\n\n");
 
-	// printf("Status: %d\n", parser.status);
-	// printf("Color_ceiling: %d\n", parser.file->color_ceiling);
-	// printf("Color_floor: %d\n", parser.file->color_floor);
+	printf("Status: %d\n", parser.status);
+	printf("Color_ceiling: %d\n", parser.file->color_ceiling);
+	printf("Color_floor: %d\n", parser.file->color_floor);
 	// printf("Player_x: %d\n", parser.file->player_x);
 	// printf("Player_y: %d\n", parser.file->player_y);
 	// printf("Total_x: %d\n", parser.file->total_x);

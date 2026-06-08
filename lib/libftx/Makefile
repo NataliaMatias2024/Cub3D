@@ -6,7 +6,7 @@
 #    By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/26 16:26:27 by mkitano           #+#    #+#              #
-#    Updated: 2026/01/21 18:02:02 by namatias         ###   ########.fr        #
+#    Updated: 2026/06/08 14:46:31 by namatias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ CORE = ft_isalpha.c \
 	ft_putnbr_fd.c \
 	ft_strcmp.c \
 	ft_isspace.c \
+	ft_atol.c \
 
 GNL = get_next_line.c
 

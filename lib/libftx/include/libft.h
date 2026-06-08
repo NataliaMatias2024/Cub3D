@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 15:04:26 by mkitano           #+#    #+#             */
-/*   Updated: 2026/06/06 12:34:00 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:58:28 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
+long	ft_atol(char *str);
 bool	ft_isspace(char c);
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);

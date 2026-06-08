@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 17:57:05 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 18:25:18 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 20:09:39 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	check_text(int start, t_parser *parser, char *line, char **coord);
 void	get_texture(char *line, t_parser *parser)
 {
 	int		start;
-	
+
 	start = 0;
 	start = skip_space(line);
 	if (!ft_strncmp(line + start, "NO", 2))

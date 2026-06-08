@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:49:21 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 19:10:30 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 20:09:59 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ typedef struct s_parser
 int		skip_space(char *line);
 int		empty_line(char *line);
 void	print_error(int status);
+void	free_split(char **splited);
 void	clean_structs(t_parser *parser);
+void	get_color(char *line, t_parser *parser);
 void	get_texture(char *line, t_parser *parser);
 int		read_file(char *map_name, t_parser *parser);
 int		check_permission(char *file, t_parser *parser);

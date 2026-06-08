@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:30:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 17:14:38 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 20:10:14 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,38 @@
 
 void	print_error(int status)
 {
-	// Manda o "Error\n" para o fd 2 (stderr)
 	ft_putstr_fd("Error\n", 2);
 	if (status == 1)
+		ft_putstr_fd("Argument Error: Expected exactly one '.cub' file.\n", 2);
+	else if (status == 2 || status == 3)
 	{
-		ft_putstr_fd("Invalid number of arguments. ", 2);
-		ft_putstr_fd("Usage: ./cub3D <map.cub>\n", 2);
+		ft_putstr_fd("File Error: ", 2);
+		if (status == 2)
+			ft_putstr_fd("Map must have a '.cub' extension.\n", 2);
+		else if (status == 3)
+			ft_putstr_fd("Cannot open file.Check path and permissions.\n", 2);
 	}
-	else if (status == 2)
-		ft_putstr_fd("Invalid file extension. Expected '.cub'.\n", 2);
-	else if (status == 3)
+	else if (status >= 4 && status <= 6)
 	{
-		ft_putstr_fd("File does not exist, is a directory, ", 2);
-		ft_putstr_fd("or cannot be opened. ", 2);
-		ft_putstr_fd("Check file permissions and its extension.\n", 2);
+		ft_putstr_fd("Texture Error: ", 2);
+		if (status == 4)
+			ft_putstr_fd("File must have a '.png' extension.\n", 2);
+		else if (status == 5)
+			ft_putstr_fd("Path contains invalid whitespace.\n", 2);
+		else if (status == 6)
+			ft_putstr_fd("Duplicated configuration (NO, SO, WE or EA).\n", 2);
 	}
-	else if (status == 4)
-		ft_putstr_fd("Invalid texture extension. Expected '.png'.\n", 2);
-	else if (status == 5)
-		ft_putstr_fd("Invalid texture. Expected a path without spaces.\n", 2);
-	else if (status == 6)
-		ft_putstr_fd("Duplicated texture. Check your map file.\n", 2);
+	else if (status >= 7 && status <= 9)
+	{
+		ft_putstr_fd("Color Error: ", 2);
+		if (status == 7)
+			ft_putstr_fd("Duplicated configuration (F or C).\n", 2);
+		else if (status == 8)
+			ft_putstr_fd("RGB values must be strictly between 0 and 255.\n", 2);
+		else if (status == 9)
+			ft_putstr_fd("Invalid format. Expected 'F or C R,G,B'.\n", 2);
+	}
+	// else if (status == 10)
 }
 
 void	init_structs(t_parser *parser, t_file *file, t_texture *texture)

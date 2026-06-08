@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 18:53:35 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/07 19:08:34 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 18:31:53 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,17 @@ void	clean_structs(t_parser *parser)
 		free (parser->file->player_view);
 		parser->file->player_view = NULL;
 	}
+}
+
+void	free_split(char **splited)
+{
+	int	i;
+
+	i = 0;
+	while (splited[i])
+	{
+		free(splited[i]);
+		i++;
+	}
+	free (splited);
 }
