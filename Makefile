@@ -6,7 +6,7 @@
 #    By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/04 17:29:36 by mkitano           #+#    #+#              #
-#    Updated: 2026/06/08 20:10:06 by namatias         ###   ########.fr        #
+#    Updated: 2026/06/08 22:33:51 by namatias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC_FILES = main.c \
 			./parser/parser_utils.c \
 			./parser/parser_texture.c \
 			./parser/clean_free.c \
-			./parser/parser_color.c
+			./parser/parser_color.c \
+			./parser/parser_map.c
 
 FILES_O = $(SRC_FILES:.c=.o)
 

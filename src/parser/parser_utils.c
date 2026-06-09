@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:30:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/08 20:10:14 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 23:13:45 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	print_error(int status)
 		else if (status == 9)
 			ft_putstr_fd("Invalid format. Expected 'F or C R,G,B'.\n", 2);
 	}
-	// else if (status == 10)
+	else if (status == 10)
+		ft_putstr_fd("File Error: Invalid info. Character not expected in this line.\n", 2);
 }
 
 void	init_structs(t_parser *parser, t_file *file, t_texture *texture)

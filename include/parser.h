@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:49:21 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/08 20:09:59 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 22:33:58 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int		empty_line(char *line);
 void	print_error(int status);
 void	free_split(char **splited);
 void	clean_structs(t_parser *parser);
+void	stop_reading_free(int fd, char *line);
+void	get_map(char *line, t_parser *parser);
 void	get_color(char *line, t_parser *parser);
 void	get_texture(char *line, t_parser *parser);
 int		read_file(char *map_name, t_parser *parser);

@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 18:53:35 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/08 18:31:53 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/08 22:08:07 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,11 @@ void	free_split(char **splited)
 		i++;
 	}
 	free (splited);
+}
+
+void	stop_reading_free(int fd, char *line)
+{
+	free(line);
+	get_next_line(-1);
+	close (fd);
 }
