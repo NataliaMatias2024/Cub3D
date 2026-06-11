@@ -3,11 +3,30 @@ SO 					./texture/dummy_SO.png
 WE 			./texture/dummy_WE.png                                     
 EA 	./texture/dummy_EA.png
                                                          
-F 220,100,0
+F 220,30,0
 C 225,30,0
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 111111
 100101
 101001
 1100N1
 111111
+
+
+
+
+
+

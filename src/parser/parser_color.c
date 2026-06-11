@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 19:35:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/08 20:29:20 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/11 19:05:25 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,10 @@ static int	ft_check_atol(char **splited, t_parser *parser)
 	i = 0;
 	while (splited[i] && i <= 2)
 	{
+		if (!ft_str_is_numeric(splited[i], parser))
+			return (0);
 		temp = ft_atol(splited[i]);
-		if ((temp >= 0 && temp <= 255) && ft_str_is_numeric(splited[i], parser))
+		if (temp >= 0 && temp <= 255)
 			i++;
 		else
 		{
