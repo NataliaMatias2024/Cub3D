@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:49:21 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/08 22:33:58 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/11 19:51:25 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ typedef struct s_file
 typedef struct s_parser
 {
 	int			status;
+	int			map_started;
+	int			map_ended;
 	t_file		*file;
+	t_dlist		*temp_map;
 }				t_parser;
 
 int		skip_space(char *line);

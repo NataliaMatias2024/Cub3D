@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:55:09 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/08 20:09:44 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/11 18:34:38 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	main(int argc, char **argv)
 	t_parser	parser;
 	t_file		file;
 	t_texture	texture;
+	t_node	*print;
+	size_t	i;
 
 	init_structs(&parser, &file, &texture);
 	if (!check_args(argc, argv, &parser))
@@ -47,6 +49,16 @@ int	main(int argc, char **argv)
 	printf("Texture WE: |%s|\n", parser.file->texture->we);
 	printf("Texture EA: |%s|\n", parser.file->texture->ea);
 	// printf("Player View: %s\n", parser.file->player_view);
+	printf("\n Imprimindo o mapa! \n");
+	i = 0;
+	print = parser.temp_map->head;
+	while(i < parser.temp_map->size)
+	{
+		printf("Mapa node %d - %s", (int)i, (char *)print->data);
+		print = print->next;
+		i++;
+	}
 	clean_structs(&parser);
+	ft_destroy_dlst(&parser.temp_map, free);
 	return (0);
 }

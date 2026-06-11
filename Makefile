@@ -6,7 +6,7 @@
 #    By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/04 17:29:36 by mkitano           #+#    #+#              #
-#    Updated: 2026/06/08 22:33:51 by namatias         ###   ########.fr        #
+#    Updated: 2026/06/11 15:25:06 by namatias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 NAME = cub3d
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRC_DIR =		./src/
 OBJ_DIR =		./obj/
