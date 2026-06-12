@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:30:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/11 19:40:00 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 02:03:06 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,17 @@ void	print_error(int status)
 		}
 	}
 	else if (status == 10)
-		ft_putstr_fd("File Error: Invalid identifier or unexpected character found.\n", 2);
+	{
+		ft_putstr_fd("File Error: ", 2);
+		ft_putstr_fd("Invalid identifier or unexpected character found.\n", 2);
+	}
 	else if (status == 11)
 		ft_putstr_fd("Memory Error: Unable to allocate memory.\n", 2);
 	else if (status == 12)
-		ft_putstr_fd("Map Error: Map has an empty line or invalid characters.\n", 2);
+	{
+		ft_putstr_fd("Map Error: ", 2);
+		ft_putstr_fd("Map has an empty line or invalid characters.\n", 2);
+	}
 }
 
 void	init_structs(t_parser *parser, t_file *file, t_texture *texture)
@@ -73,6 +79,7 @@ void	init_structs(t_parser *parser, t_file *file, t_texture *texture)
 	parser->file->player_view = NULL;
 	parser->file->player_x = -1;
 	parser->file->player_y = -1;
+	parser->file->map = NULL;
 	parser->file->total_x = -1;
 	parser->file->total_y = -1;
 }

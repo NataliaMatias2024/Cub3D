@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 18:53:35 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/08 22:08:07 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 01:31:25 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ void	clean_structs(t_parser *parser)
 	{
 		free (parser->file->player_view);
 		parser->file->player_view = NULL;
+	}
+	if (parser->file->map != NULL)
+	{
+		free_split(parser->file->map);
+		parser->file->map = NULL;
+	}
+	if (parser->temp_map != NULL)
+	{
+		ft_destroy_dlst(&parser->temp_map, free);
 	}
 }
 

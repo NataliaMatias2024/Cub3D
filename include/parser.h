@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:49:21 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/11 19:51:25 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 01:29:59 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ typedef struct s_file
 {
 	t_texture	*texture;
 	int			color_floor;
-	int			color_ceiling;	
+	int			color_ceiling;
 	char		*player_view;
 	int			player_x;
 	int			player_y;
+	char		**map;
 	int			total_x;
 	int			total_y;
 }				t_file;
@@ -54,6 +55,7 @@ int		empty_line(char *line);
 void	print_error(int status);
 void	free_split(char **splited);
 void	clean_structs(t_parser *parser);
+void	create_final_map(t_parser *parser);
 void	stop_reading_free(int fd, char *line);
 void	get_map(char *line, t_parser *parser);
 void	get_color(char *line, t_parser *parser);
