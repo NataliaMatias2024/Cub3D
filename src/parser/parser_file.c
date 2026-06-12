@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 18:05:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 01:59:40 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 17:28:29 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ int	read_file(char *map_name, t_parser *parser)
 		free (line);
 		line = get_next_line(fd);
 	}
-	if (parser->status == 0 && parser->temp_map->size > 0)
-		create_final_map(parser);
-	close (fd);
-	return (1);
+	if (create_save_map(parser, fd))
+		return (1);
+	return (0);
 }
 
 static void	load_struc(t_parser *parser, char *line)

@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 22:31:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 02:00:13 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 17:27:22 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	get_map(char *line, t_parser *parser)
 
 	if (!check_map_status(parser, line))
 		return ;
-	parser->map_started = 1;
 	line_copy = ft_strdup(line);
 	if (!line_copy)
 	{
@@ -71,31 +70,46 @@ static void	fill_map_array(t_parser *parser, char **map)
 	{
 		map[i] = ft_strdup((char *)aux->data);
 		temp = ft_strlen(map[i]);
-		if (temp > 0 && map[i][temp - 1] == '\n')
+		while (temp > 0 && (map[i][temp - 1] == '\n' || map[i][temp - 1] == '\r'))
+		{
+			map[i][temp - 1] = '\0';
 			temp--;
+		}
 		if (temp > cols)
 			cols = temp;
 		aux = aux->next;
 		i++;
 	}
 	map[i] = '\0';
-	parser->file->total_x = cols;
-	parser->file->total_y = (int)parser->temp_map->size;
+	parser->file->total_row = (int)parser->temp_map->size;
+	parser->file->total_col = cols;
 	parser->file->map = map;
 }
 
-void	create_final_map(t_parser *parser)
+int	create_save_map(t_parser *parser, int fd)
 {
 	int		rows;
 	char	**map;
 
-	rows = (int)parser->temp_map->size;
-	map = malloc((rows + 1) * sizeof(char *));
-	if (!map)
+	if (parser->status == 0 && parser->temp_map->size > 0)
 	{
-		parser->status = 11;
-		return ;
+		rows = (int)parser->temp_map->size;
+		map = malloc((rows + 1) * sizeof(char *));
+		if (!map)
+		{
+			parser->status = 11;
+			return (0);
+		}
+		fill_map_array(parser, map);
+		ft_destroy_dlst(&parser->temp_map, free);
 	}
-	fill_map_array(parser, map);
-	ft_destroy_dlst(&parser->temp_map, free);
+	if (parser->status == 0 && parser->file->map != NULL)
+	{
+		if (!check_map_info(parser->file))
+			parser->status = 13;
+	}
+	close(fd);
+	if (parser->status != 0)
+		return (0);
+	return (1);
 }

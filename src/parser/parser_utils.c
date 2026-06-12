@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:30:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 02:03:06 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 17:29:56 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	print_error(int status)
 		ft_putstr_fd("Map Error: ", 2);
 		ft_putstr_fd("Map has an empty line or invalid characters.\n", 2);
 	}
+	else if (status == 13)
+	{
+		ft_putstr_fd("Map Error: ", 2);
+		ft_putstr_fd("Invalid character, or multiple/missing players.\n", 2);
+	}
 }
 
 void	init_structs(t_parser *parser, t_file *file, t_texture *texture)
@@ -76,12 +81,12 @@ void	init_structs(t_parser *parser, t_file *file, t_texture *texture)
 	parser->file->texture->ea = NULL;
 	parser->file->color_ceiling = -1;
 	parser->file->color_floor = -1;
-	parser->file->player_view = NULL;
-	parser->file->player_x = -1;
-	parser->file->player_y = -1;
+	parser->file->player_view = -1;
+	parser->file->player_row = -1;
+	parser->file->player_col = -1;
 	parser->file->map = NULL;
-	parser->file->total_x = -1;
-	parser->file->total_y = -1;
+	parser->file->total_row = -1;
+	parser->file->total_col = -1;
 }
 
 int	empty_line(char *line)
