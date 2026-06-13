@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:30:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 17:29:56 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 21:21:30 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,18 @@ void	print_error(int status)
 	}
 	else if (status == 11)
 		ft_putstr_fd("Memory Error: Unable to allocate memory.\n", 2);
-	else if (status == 12)
+	else if (status >= 12 && status <= 14)
 	{
 		ft_putstr_fd("Map Error: ", 2);
-		ft_putstr_fd("Map has an empty line or invalid characters.\n", 2);
-	}
-	else if (status == 13)
-	{
-		ft_putstr_fd("Map Error: ", 2);
-		ft_putstr_fd("Invalid character, or multiple/missing players.\n", 2);
+		if (status == 12)
+			ft_putstr_fd("Map has an empty line or invalid characters.\n", 2);
+		if (status == 13)
+			ft_putstr_fd("Invalid character or multiple/missing players.\n", 2);
+		if (status == 14)
+		{
+			ft_putstr_fd("Invalid format, ", 2);
+			ft_putstr_fd("map should be surround by walls (1) only!\n", 2);
+		}
 	}
 }
 

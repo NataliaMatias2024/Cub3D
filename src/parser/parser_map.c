@@ -6,14 +6,15 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 22:31:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 17:27:22 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 21:21:29 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	check_map_status(t_parser *parser, char *line);
 static void	fill_map_array(t_parser *parser, char **map);
+static int	check_map_status(t_parser *parser, char *line);
+static void	validate_map_rules(t_parser *parser, t_file *file);
 
 void	get_map(char *line, t_parser *parser)
 {
@@ -70,7 +71,8 @@ static void	fill_map_array(t_parser *parser, char **map)
 	{
 		map[i] = ft_strdup((char *)aux->data);
 		temp = ft_strlen(map[i]);
-		while (temp > 0 && (map[i][temp - 1] == '\n' || map[i][temp - 1] == '\r'))
+		while (temp > 0 && (map[i][temp - 1] == '\n'
+			|| map[i][temp - 1] == '\r'))
 		{
 			map[i][temp - 1] = '\0';
 			temp--;
@@ -80,7 +82,7 @@ static void	fill_map_array(t_parser *parser, char **map)
 		aux = aux->next;
 		i++;
 	}
-	map[i] = '\0';
+	map[i] = NULL;
 	parser->file->total_row = (int)parser->temp_map->size;
 	parser->file->total_col = cols;
 	parser->file->map = map;
@@ -104,12 +106,23 @@ int	create_save_map(t_parser *parser, int fd)
 		ft_destroy_dlst(&parser->temp_map, free);
 	}
 	if (parser->status == 0 && parser->file->map != NULL)
-	{
-		if (!check_map_info(parser->file))
-			parser->status = 13;
-	}
+		validate_map_rules(parser, parser->file);
 	close(fd);
 	if (parser->status != 0)
 		return (0);
 	return (1);
+}
+
+static void	validate_map_rules(t_parser *parser, t_file *file)
+{
+	char	**map_copy;
+
+	map_copy = clone_map(parser, parser->file);
+	if (!map_copy)
+		return ;
+	if (!check_map_info(file))
+		parser->status = 13;
+	else if (!trigger_flood_fill(file, map_copy))
+		parser->status = 14;
+	free_split(map_copy);
 }

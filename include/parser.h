@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:49:21 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 14:55:44 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 21:21:33 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,18 @@ int		skip_space(char *line);
 int		empty_line(char *line);
 void	print_error(int status);
 void	free_split(char **splited);
+int		check_map_info(t_file *file);
 void	clean_structs(t_parser *parser);
 void	create_final_map(t_parser *parser);
 void	stop_reading_free(int fd, char *line);
 void	get_map(char *line, t_parser *parser);
 void	get_color(char *line, t_parser *parser);
 void	get_texture(char *line, t_parser *parser);
-int		read_file(char *map_name, t_parser *parser);
-int		check_map_info(t_file *file);
 int		create_save_map(t_parser *parser, int fd);
+int		read_file(char *map_name, t_parser *parser);
+char	**clone_map(t_parser *parser, t_file *file);
 int		check_permission(char *file, t_parser *parser);
+int 	trigger_flood_fill(t_file *file, char **map_copy);
 int		check_args(int argc, char **argv, t_parser *status);
 void	init_structs(t_parser *parser, t_file *file, t_texture *texture);
 
