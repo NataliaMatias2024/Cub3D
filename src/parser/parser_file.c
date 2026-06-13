@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 18:05:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 17:28:29 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 23:48:54 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static	int	only_map_empty(t_parser *parser);
 static void	load_struc(t_parser *parser, char *line);
 static	int	is_valid_line(t_parser *parse, char *line);
 
-//Le o arquivo .cub linha por linha e encaminha a linha para a funçao de parser correta
-//Erros devem interromper o programa e avisar a gnl que deve encerrar e liberar memoria
+//Le o arquivo .cub e encaminha a linha para a funçao de parser correta
+//Erros devem interromper o programa, avisar a gnl para parar e liberar memoria
 int	read_file(char *map_name, t_parser *parser)
 {
 	int		fd;
@@ -33,13 +33,15 @@ int	read_file(char *map_name, t_parser *parser)
 			load_struc(parser, line);
 		if (parser->status != 0)
 		{
-			stop_reading_free(fd, line);
+			free(line);
+			get_next_line(-1);
+			close (fd);
 			return (0);
 		}
 		free (line);
 		line = get_next_line(fd);
 	}
-	if (create_save_map(parser, fd))
+	if (build_map_matrix(parser, fd))
 		return (1);
 	return (0);
 }
@@ -55,7 +57,7 @@ static void	load_struc(t_parser *parser, char *line)
 			get_color(line, parser);
 	}
 	else if (only_map_empty(parser))
-		get_map(line, parser);
+		append_map_line(line, parser);
 }
 
 static	int	is_valid_line(t_parser *parser, char *line)

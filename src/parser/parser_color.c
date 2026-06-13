@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 19:35:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/11 19:05:25 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 23:09:58 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ static void	check_color(int start, t_parser *parser, char *line, int *color)
 		free_split(rgb);
 }
 
-//O Formato de cor exigido pela minilibx é em hexadecimal ou TRGB (acrescenta a faixa de transparencia)
+//O Formato exigido pela minilibx é em hexadecimal ou TRGB (RGB + transparencia)
 //Primeiro garantimos que foram recebidos apenas R G B (3 faixas)
 //isolamos cada uma e só depois geramos o TRGB
-//Nesse projeto tanto o chao quanto o teto nao terão transparencia e a faixa T será sempre 0
-//Por isso omiti T no bitwise pois o C automaticamente preenche esses bits com zeros 
+//Tanto o chao quanto o teto NAO terão transparencia (A faixa T será 0)
+//Por isso omiti T no bitwise, pois o C automaticamente preenche os bits com 0 
 static int	check_free_split(char **splited, t_parser *parser, int *color)
 {
 	int	i;

@@ -6,17 +6,17 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 22:31:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 21:21:29 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 23:50:54 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	fill_map_array(t_parser *parser, char **map);
+static int	fill_map_array(t_parser *parser, char **map);
 static int	check_map_status(t_parser *parser, char *line);
 static void	validate_map_rules(t_parser *parser, t_file *file);
 
-void	get_map(char *line, t_parser *parser)
+void	append_map_line(char *line, t_parser *parser)
 {
 	t_node	*new_node;
 	char	*line_copy;
@@ -57,7 +57,34 @@ static int	check_map_status(t_parser *parser, char *line)
 	return (1);
 }
 
-static void	fill_map_array(t_parser *parser, char **map)
+int	build_map_matrix(t_parser *parser, int fd)
+{
+	int		rows;
+	char	**map;
+
+	if (parser->status == 0 && parser->temp_map->size > 0)
+	{
+		rows = (int)parser->temp_map->size;
+		map = malloc((rows + 1) * sizeof(char *));
+		if (!map)
+		{
+			parser->status = 11;
+			return (0);
+		}
+		parser->file->total_col = fill_map_array(parser, map);
+		parser->file->total_row = rows;
+		parser->file->map = map;
+		ft_destroy_dlst(&parser->temp_map, free);
+	}
+	if (parser->status == 0 && parser->file->map != NULL)
+		validate_map_rules(parser, parser->file);
+	close(fd);
+	if (parser->status != 0)
+		return (0);
+	return (1);
+}
+
+static int	fill_map_array(t_parser *parser, char **map)
 {
 	t_node	*aux;
 	int		cols;
@@ -83,34 +110,7 @@ static void	fill_map_array(t_parser *parser, char **map)
 		i++;
 	}
 	map[i] = NULL;
-	parser->file->total_row = (int)parser->temp_map->size;
-	parser->file->total_col = cols;
-	parser->file->map = map;
-}
-
-int	create_save_map(t_parser *parser, int fd)
-{
-	int		rows;
-	char	**map;
-
-	if (parser->status == 0 && parser->temp_map->size > 0)
-	{
-		rows = (int)parser->temp_map->size;
-		map = malloc((rows + 1) * sizeof(char *));
-		if (!map)
-		{
-			parser->status = 11;
-			return (0);
-		}
-		fill_map_array(parser, map);
-		ft_destroy_dlst(&parser->temp_map, free);
-	}
-	if (parser->status == 0 && parser->file->map != NULL)
-		validate_map_rules(parser, parser->file);
-	close(fd);
-	if (parser->status != 0)
-		return (0);
-	return (1);
+	return (cols);
 }
 
 static void	validate_map_rules(t_parser *parser, t_file *file)

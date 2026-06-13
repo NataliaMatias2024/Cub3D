@@ -6,34 +6,17 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 18:53:35 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 03:08:52 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 23:59:21 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	clean_structs(t_parser *parser)
+static void	clean_texture(t_file *file);
+
+void	clean_all(t_parser *parser)
 {
-	if (parser->file->texture->no != NULL)
-	{
-		free (parser->file->texture->no);
-		parser->file->texture->no = NULL;
-	}
-	if (parser->file->texture->so != NULL)
-	{
-		free (parser->file->texture->so);
-		parser->file->texture->so = NULL;
-	}
-	if (parser->file->texture->we != NULL)
-	{
-		free (parser->file->texture->we);
-		parser->file->texture->we = NULL;
-	}
-	if (parser->file->texture->ea != NULL)
-	{
-		free (parser->file->texture->ea);
-		parser->file->texture->ea = NULL;
-	}
+	clean_texture(parser->file);
 	if (parser->file->map != NULL)
 	{
 		free_split(parser->file->map);
@@ -42,6 +25,30 @@ void	clean_structs(t_parser *parser)
 	if (parser->temp_map != NULL)
 	{
 		ft_destroy_dlst(&parser->temp_map, free);
+	}
+}
+
+static void	clean_texture(t_file *file)
+{
+	if (file->texture->no != NULL)
+	{
+		free (file->texture->no);
+		file->texture->no = NULL;
+	}
+	if (file->texture->so != NULL)
+	{
+		free (file->texture->so);
+		file->texture->so = NULL;
+	}
+	if (file->texture->we != NULL)
+	{
+		free (file->texture->we);
+		file->texture->we = NULL;
+	}
+	if (file->texture->ea != NULL)
+	{
+		free (file->texture->ea);
+		file->texture->ea = NULL;
 	}
 }
 
@@ -56,11 +63,4 @@ void	free_split(char **splited)
 		i++;
 	}
 	free (splited);
-}
-
-void	stop_reading_free(int fd, char *line)
-{
-	free(line);
-	get_next_line(-1);
-	close (fd);
 }

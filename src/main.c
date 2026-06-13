@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:55:09 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 17:30:31 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/12 23:53:57 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	main(int argc, char **argv)
 	{
 		printf("Veeeesh deu chabu!\n");
 		print_error(parser.status);
-		clean_structs(&parser);
+		clean_all(&parser);
 		return (1);
 	}
 	else if (!read_file(argv[1], &parser))
 	{
 		printf("Ihhhhh mapa invalido!\n");
 		print_error(parser.status);
-		clean_structs(&parser);
+		clean_all(&parser);
 		return (1);
 	}
 	printf("Tudo certo!\nRoda a bagaceira!!!\n\n");
@@ -54,6 +54,6 @@ int	main(int argc, char **argv)
 		printf("Linha %d - %s\n", i, parser.file->map[i]);
 		i++;
 	}
-	clean_structs(&parser);
+	clean_all(&parser);
 	return (0);
 }

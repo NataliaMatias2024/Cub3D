@@ -6,7 +6,7 @@
 #    By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/04 17:29:36 by mkitano           #+#    #+#              #
-#    Updated: 2026/06/12 02:07:35 by namatias         ###   ########.fr        #
+#    Updated: 2026/06/13 00:16:05 by namatias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,15 @@ MLX_DIR =		./lib/mlx42/
 MLX_BUILD =		$(MLX_DIR)/build/
 
 SRC_FILES = main.c \
+			./parser/clean_free.c \
+			./parser/parser_map.c \
 			./parser/parser_args.c \
 			./parser/parser_file.c \
 			./parser/parser_utils.c \
-			./parser/parser_texture.c \
-			./parser/clean_free.c \
 			./parser/parser_color.c \
-			./parser/parser_map.c \
-			./parser/parser_map_utils.c  
+			./parser/parser_texture.c \
+			./parser/parser_map_utils.c \
+			./parser/parser_error_msg.c \
 
 FILES_O = $(SRC_FILES:.c=.o)
 
