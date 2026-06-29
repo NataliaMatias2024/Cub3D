@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 19:35:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 23:09:58 by namatias         ###   ########.fr       */
+/*   Updated: 2026/06/29 00:38:57 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ static void	check_color(int start, t_parser *parser, char *line, int *color)
 		free_split(rgb);
 }
 
-//O Formato exigido pela minilibx é em hexadecimal ou TRGB (RGB + transparencia)
-//Primeiro garantimos que foram recebidos apenas R G B (3 faixas)
-//isolamos cada uma e só depois geramos o TRGB
-//Tanto o chao quanto o teto NAO terão transparencia (A faixa T será 0)
-//Por isso omiti T no bitwise, pois o C automaticamente preenche os bits com 0 
+/*
+** O formato exigido pela MinilibX clássica é TRGB.
+** Porém, a MLX42 (Codam) utiliza o formato RGBA (Red, Green, Blue, Alpha).
+** O bitwise abaixo empurra as cores e aplica 0xFF para garantir opacidade total.
+*/
 static int	check_free_split(char **splited, t_parser *parser, int *color)
 {
 	int	i;
 	int	r;
 	int	g;
 	int	b;
-	int	trgb;
+	int	rgba;
 
 	i = 0;
 	while (splited[i])
@@ -80,8 +80,8 @@ static int	check_free_split(char **splited, t_parser *parser, int *color)
 	r = ft_atoi(splited[0]);
 	g = ft_atoi(splited[1]);
 	b = ft_atoi(splited[2]);
-	trgb = r << 16 | g << 8 | b;
-	*color = trgb;
+	rgba = r << 24 | g << 16 | b << 8 | 0xFF;
+	*color = rgba;
 	free_split(splited);
 	return (1);
 }
