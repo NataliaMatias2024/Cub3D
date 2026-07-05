@@ -1,0 +1,13 @@
+NO ./texture/wood01_32x32.png
+SO 					./texture/wood02_32x32.png
+WE 			./texture/wood03_32x32.png
+EA 	./texture/wood04_32x32.png
+
+F 105, 73, 52
+C 135, 206, 235
+
+111111111
+100000001
+100010001
+100000N01
+111111111

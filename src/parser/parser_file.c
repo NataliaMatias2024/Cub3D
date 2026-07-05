@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 18:05:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 23:48:54 by namatias         ###   ########.fr       */
+/*   Updated: 2026/07/05 16:57:24 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	read_file(char *map_name, t_parser *parser)
 		free (line);
 		line = get_next_line(fd);
 	}
-	if (build_map_matrix(parser, fd))
+	close (fd);
+	if (build_map_matrix(parser))
 		return (1);
 	return (0);
 }

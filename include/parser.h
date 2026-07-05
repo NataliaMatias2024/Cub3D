@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 10:49:21 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/13 00:13:51 by namatias         ###   ########.fr       */
+/*   Updated: 2026/07/05 16:59:18 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	get_color(char *line, t_parser *parser);
 
 /* --- Map Handling & Matrix Building (parser_map.c) ------------------------ */
 void	append_map_line(char *line, t_parser *parser);
-int		build_map_matrix(t_parser *parser, int fd);
+int		build_map_matrix(t_parser *parser);
 
 /* --- Map Validation & Flood Fill (parser_map_utils.c) --------------------- */
 int		check_map_info(t_file *file);

@@ -25,17 +25,45 @@ INCLUDE_DIR =	./include/
 LIB_DIR =		./lib/libftx/
 MLX_DIR =		./lib/mlx42/
 MLX_BUILD =		$(MLX_DIR)/build/
+PARSER_DIR =	./parser/
+ENGINE_DIR =	./engine/
+INPUTS_DIR =	./inputs/
+RENDER_DIR =	./render/
+CLEAN_DIR =		./clean/
+
+PARSE_FILES =	clean_free.c \
+				parser_map.c \
+				parser_args.c \
+				parser_file.c \
+				parser_utils.c \
+				parser_color.c \
+				parser_texture.c \
+				parser_map_utils.c \
+				parser_error_msg.c \
+
+ENGINE_FILES =	init.c \
+				start_game.c \
+
+INPUTS_FILES =	key_hook.c \
+				player_move.c \
+				rotate.c \
+
+RENDER_FILES =	cal_raycast.c \
+				bg_render.c \
+				color.c \
+				draw.c \
+				cal_minimap.c \
+				minimap.c \
+				raycast.c\
+
+CLEAN_FILES =	clean.c
 
 SRC_FILES = main.c \
-			./parser/clean_free.c \
-			./parser/parser_map.c \
-			./parser/parser_args.c \
-			./parser/parser_file.c \
-			./parser/parser_utils.c \
-			./parser/parser_color.c \
-			./parser/parser_texture.c \
-			./parser/parser_map_utils.c \
-			./parser/parser_error_msg.c \
+			$(addprefix $(PARSER_DIR), $(PARSE_FILES)) \
+			$(addprefix $(ENGINE_DIR), $(ENGINE_FILES)) \
+			$(addprefix $(INPUTS_DIR), $(INPUTS_FILES)) \
+			$(addprefix $(RENDER_DIR), $(RENDER_FILES)) \
+			$(addprefix $(CLEAN_DIR), $(CLEAN_FILES)) \
 
 FILES_O = $(SRC_FILES:.c=.o)
 
@@ -102,6 +130,7 @@ fclean: clean
 re: fclean all
 
 val: all
-	valgrind -q --suppressions=mlx.supp --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes ./$(NAME) $(ARGS)
-
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
+	--suppressions=mlx.supp -s ./$(NAME) ./maps/basic_map.cub
+	
 .PHONY: all clean fclean re val

@@ -6,7 +6,7 @@
 /*   By: namatias <namatias@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 22:31:33 by namatias          #+#    #+#             */
-/*   Updated: 2026/06/12 23:50:54 by namatias         ###   ########.fr       */
+/*   Updated: 2026/07/05 16:56:18 by namatias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	check_map_status(t_parser *parser, char *line)
 	return (1);
 }
 
-int	build_map_matrix(t_parser *parser, int fd)
+int	build_map_matrix(t_parser *parser)
 {
 	int		rows;
 	char	**map;
@@ -78,7 +78,6 @@ int	build_map_matrix(t_parser *parser, int fd)
 	}
 	if (parser->status == 0 && parser->file->map != NULL)
 		validate_map_rules(parser, parser->file);
-	close(fd);
 	if (parser->status != 0)
 		return (0);
 	return (1);
