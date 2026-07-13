@@ -3,7 +3,7 @@
 </h1>
 
 # 🕹️ Cub3D - @42SP
-**Score:** 
+**Score:** 115/100 ✅ (100% Mandatory + Selected Bonus Features)
 
 This repository contains a 3D graphics engine developed in C using the MLX42 (Codam) library for the `cub3d` project of the [42 São Paulo](https://www.42sp.org.br/) curriculum.
 
